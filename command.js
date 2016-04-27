@@ -1,4 +1,5 @@
 var fs = require('fs');
+var request = require('request');
 
 module.exports = {
 
@@ -26,6 +27,7 @@ module.exports = {
 	cat: function(file){
 		fs.readFile(file, 'utf8', function(err, contents){
 			console.log(contents)
+			process.stdout.write("prompt > ");
 		})
 	},
 
@@ -34,6 +36,7 @@ module.exports = {
 			var lines = contents.split("\n");
 			var headArray = lines.slice(0, 5);
 			console.log(headArray.join('\n'));
+			process.stdout.write("prompt > ");
 		})
 		
 	},
@@ -43,19 +46,36 @@ module.exports = {
 			var lines = contents.split("\n")
 			var headArray = lines.splice(-6);
 			console.log(headArray.join('\n'));
+			process.stdout.write("prompt > ");
 		})
 
 	},
 
-	sort: function(file){
-		fs.readFile(file, 'utf8', function(err, contents){
-			var contentArray = contents.split("\n");
 
-			for(var i = 0; i <contentArray.length; i++){
-				//do something with content.Array[i]--> charCodeAt(0)
+
+	 curl: function(file){
+	 	console.log(file);
+		request(file, function(error, response, body){
+			if (!error && response.statusCode === 200){
+				console.log(body);
+				process.stdout.write("prompt > ");
 			}
 		})
-	},
+			
+
+	 },
+
+
+
+	// sort: function(file){
+	// 	fs.readFile(file, 'utf8', function(err, contents){
+	// 		var contentArray = contents.split("\n");
+
+	// 		for(var i = 0; i <contentArray.length; i++){
+	// 			//do something with content.Array[i]--> charCodeAt(0)
+	// 		}
+	// 	})
+	// },
 
 
 

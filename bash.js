@@ -1,5 +1,6 @@
 // Output a prompt
 var command = require('./command');
+
 // var userCommand = 'pwd';
 // var userCommand ='ls';
 
@@ -16,3 +17,8 @@ process.stdin.on('data', function (data) {
  		 command[commandInput](additionalInput);
 });
 
+
+var done = function(output){
+		console.log(output);
+		process.stdout.write("prompt > ");
+}
